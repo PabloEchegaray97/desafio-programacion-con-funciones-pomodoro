@@ -1,6 +1,6 @@
 let cantP=6, tiempoP=20, intervaloLargo=3, desCorto=5, desLargo=10;
 
-let opcion=prompt("¿Desea dejar los valores por defecto?\n1. Si\n2. No\n*Valores por defecto:\nCantidad de pomodoros: " + cantP +"\nDuracion: " + tiempoP +" minutos\nDescanso: " + desCorto + " minutos\nDescanso largo (despues de " + intervaloLargo +" pomodoros): " + desLargo + " minutos"); //si op =2 el usuario va a ingresar los datos manualmente
+let opcion=prompt("¿Desea dejar los valores por defecto?\n<1>. Si\n<Cualquier tecla>. No\n*Valores por defecto:\nCantidad de pomodoros: " + cantP +"\nDuracion: " + tiempoP +" minutos\nDescanso: " + desCorto + " minutos\nDescanso largo (despues de " + intervaloLargo +" pomodoros): " + desLargo + " minutos"); //si op =2 el usuario va a ingresar los datos manualmente
 
 function mostrar_datos() {
     if (intervaloLargo>1) {
