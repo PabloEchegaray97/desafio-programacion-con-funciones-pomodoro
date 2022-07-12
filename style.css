@@ -1,5 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 * {
-    margin: 0;
     padding: 0;
+    margin: 0;
     box-sizing: border-box;
+    font-family: VT323, monospace;
+
+    letter-spacing: .2rem;
+}
+body {
+    background-color: rgb(35, 22, 80);
+}
+.timer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.play {
+    width: 7rem;
+    cursor: pointer;
+    filter: opacity(.8);
+}
+.play:active {
+    transform: scale(.8);
+}
+.inputs {
+    display: flex;
+}
+.selector {
+    display: flex;
+}
+
+.button {
+    background-color: transparent;
+    border: none;
+    padding: 0 1.6rem;
+    cursor: pointer;
+    font-size: 1.6rem;
+    display: flex;
+}
+.button:active {
+    transform: scale(.8);
+}
+.item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1.6rem;
+}
+.item-text {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+.item-num, .button {
+    font-size: 2.4rem;
+    margin: 1rem 0;
+    color: rgba(255, 255, 255, 0.8);
+}
+.display-nums {
+    font-size: 4rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 1rem;
+}
+.section {
+    display: flex;
 }
