@@ -4,7 +4,7 @@
     margin: 0;
     box-sizing: border-box;
     font-family: VT323, monospace;
-    text-transform: uppercase;
+
     letter-spacing: .2rem;
 }
 body {
@@ -17,13 +17,12 @@ body {
     
 }
 .play {
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    background-color: transparent;
-    width: 3rem;
-    color:rgba(255, 255, 255, 0.5);
-    padding: 1rem;
-    border-radius: 50%;
+    width: 7rem;
     cursor: pointer;
+    filter: opacity(.8);
+}
+.play:active {
+    transform: scale(.8);
 }
 .inputs {
     display: flex;
@@ -40,6 +39,9 @@ body {
     font-size: 1.6rem;
     display: flex;
 }
+.button:active {
+    transform: scale(.8);
+}
 .item {
     display: flex;
     flex-direction: column;
@@ -47,16 +49,19 @@ body {
     margin: 1.6rem;
 }
 .item-text {
-    font-size: .8rem;
-    color: rgba(255, 255, 255, 0.4);
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.8);
 }
 .item-num, .button {
-    font-size: 1.6rem;
-    margin: .8rem 0;
-    color: rgba(255, 255, 255, 0.4);
+    font-size: 2.4rem;
+    margin: 1rem 0;
+    color: rgba(255, 255, 255, 0.8);
 }
 .display-nums {
     font-size: 4rem;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.8);
     margin: 1rem;
+}
+.section {
+    display: flex;
 }

@@ -1,50 +1,61 @@
-let cantP=6, tiempoP=20, intervaloLargo=3, desCorto=5, desLargo=10;
-
-let opcion=prompt("¿Desea dejar los valores por defecto?\n1. Si\n2. No\n*Valores por defecto:\nCantidad de pomodoros: " + cantP +"\nDuracion: " + tiempoP +" minutos\nDescanso: " + desCorto + " minutos\nDescanso largo (despues de " + intervaloLargo +" pomodoros): " + desLargo + " minutos"); //si op =2 el usuario va a ingresar los datos manualmente
-
-function mostrar_datos() {
-    if (intervaloLargo>1) {
-        alert ("Cantidad de pomodoros: "+ cantP + "\nDuracion (minutos): " + tiempoP + "\nDescanso (minutos): " + desCorto +"\nDescanso largo (despues de " + intervaloLargo + " pomodoros) (minutos) : " + desLargo)
+let duracion;
+let tiempo;
+let descansos;
+let desc=false;
+let inicio2;
+function init_desc() {
+    clearInterval(inicio);
+    console.log("Inicio descanso");
+    tiempo = descansos * 60;
+    inicio2= setInterval(act_temporizador,1000);
+    desc=true;
+}
+function act_temporizador() {
+    let minutos = Math.floor(tiempo / 60); // devuelve el maximo entero 
+    let segundos = tiempo % 60; // calculamos los segundos mediante el resto del tiempo total
+    if (segundos < 10) { //si los segundos son <10 agregar un 0 delante
+        segundos = "0" + segundos;
+    }
+    console.log(minutos + ":" + segundos);
+    if (tiempo==0 && desc==false) {
+        init_desc();
     }
     else {
-        alert ("Cantidad de pomodoros: "+ cantP + "\nDuracion (minutos): " + tiempoP + "\nDescanso (minutos): " + desCorto +"\nDescanso largo (despues de " + intervaloLargo + " pomodoro) (minutos) : " + desLargo)
+        tiempo--; //restar el tiempo total -> ej: 
+        if (desc==true  && minutos==0 && segundos==0) {
+            clearInterval(inicio2);
+            console.log("Fin descanso");
+        }
     }
 }
+do {
+    duracion = prompt("Ingrese la duracion que tendran los pomodoros:"); //minutos que le pasaremos al programa
+    descansos= prompt("Ingrese la duracion de los descansos:");
+    if (duracion <= 0 || isNaN(duracion) || descansos<=0 || isNaN(descansos)) {
+        console.log("Ingresar una duracion valida.")
+    }
+    
 
-function ingresar_datos() { // al ingresar los datos estos se comparan y en caso de ser incorrectos se vuelven a ingresar
-    do {
-        cantP=parseInt(prompt("Ingrese la cantidad de pomodoros que desea realizar:"));
-        if (cantP<1 || isNaN(cantP)==true) {
-            alert("Ingresa un valor valido por favor. Ej: 3")
-            continue;
-        }
+} while (duracion < 1 || isNaN(duracion) == true || descansos<1 || isNaN(descansos));
 
-        tiempoP=parseInt(prompt("Ingrese el tiempo de cada pomodoro en minutos:"));
-        if (tiempoP<1 || isNaN(tiempoP)==true) {
-            alert("Ingresa un valor valido por favor. No puede ser menor a 1 minuto");
-            continue;
-        }
+tiempo = duracion * 60; //convertimos todo a segundos 
 
-        intervaloLargo=parseInt(prompt ("Determine cada cuantos pomodoros tendrá un descanso largo:"));
-        if (intervaloLargo<1 || isNaN(intervaloLargo)==true) {
-            alert("Ingresa un valor valido por favor.")
-            continue;
-        }
-
-        desCorto=parseInt(prompt("Determine el tiempo de los descansos en minutos:"));
-        if (desCorto<1 || isNaN(desCorto)==true) {
-            alert("Ingresa un valor valido por favor. No puede ser menor a 1 minuto")
-            continue;
-        }
-
-        desLargo=parseInt(prompt("Determine el tiempo de los descansos largos:"));
-        if (desLargo<1 || isNaN(desLargo)==true) {
-            alert("Ingresa un valor valido por favor. No puede ser menor a 1 minuto")
-            continue;
-        }
-    } while (cantP<1 || tiempoP<1 || intervaloLargo<1 || desCorto<1 || desLargo<1 || isNaN(cantP)==true || isNaN(tiempoP)==true || isNaN(intervaloLargo)==true || isNaN(desCorto)==true || isNaN(desLargo)==true);
-}
-if (opcion!="1") {
-    ingresar_datos();
-}
-mostrar_datos();
+const inicio = setInterval(act_temporizador, 1000); // ejecutar la funcion act_temporizador cada un intervalo de 1000ms y guardarlo en la constante 'inicio' para luego limpiarla dependiendo la situacion
+//Pruebas 1er ciclo
+    // duracion = 2
+    // tiempo = duracion * 2 -> = 120
+    // llamar funcion cada un intervalo de 1000ms
+    //en la funcion
+        // minutos=tiempo/60 -> = 2 (la funcion math floor devuelve el max entero)
+        // segundos = tiempo % 60 -> = 0 (el resto es 0 ya que duracion es igual a 120)
+        // mostramos en consola el reloj -> 2:00
+        // tiempo = tiempo -1 -> tiempo = 119
+        // si m=0 & s=0 salimos del intervalo limpiando la variable (este no es el caso), seguimos ejecutando la funcion cada un intervalo de 1000ms
+//Pruebas 2er ciclo
+    // llamar funcion cada un intervalo de 1000ms
+    //en la funcion
+        // minutos=tiempo/60 -> = 1... (la funcion math floor devuelve el max entero) -> 1
+        // segundos = tiempo % 60 -> = 59 (el resto es 59 ya que duracion es igual a 119)
+        // mostramos en consola el reloj -> 1:59
+        // tiempo = tiempo -1 -> tiempo = 118
+        // si m=0 & s=0 salimos del intervalo limpiando la variable (este no es el caso), seguimos ejecutando la funcion cada un intervalo de 1000ms
