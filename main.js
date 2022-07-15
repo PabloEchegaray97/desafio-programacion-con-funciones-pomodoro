@@ -1,63 +1,54 @@
-let duracion;
 let tiempo;
-let descansos;
-let desc=false; //indica si se esta descansando o no
+let desc=false; 
 let inicio2;
-function init_desc() { // se inicializa cuando se termina el tiempo del pomodoro
-    clearInterval(inicio); //limpiamos la variable, terminando asi con el intervalo que llamaba a la funcion act_temporizador
+const pomodoro = { duracion: 20, descansos: 5 };
+function init_desc() { 
+    clearInterval(inicio);
+    console.log("Fin sesión")
     console.log("Inicio descanso");
-    tiempo = descansos * 60; // cambiar el valor de tiempo de manera global
-    inicio2= setInterval(act_temporizador,1000); // guardar en variable el intervalo para luego limpiarla cuando se termine el descanso
-    desc=true; // indica si se esta descansando
+    tiempo = pomodoro.descansos * 60; 
+    inicio2= setInterval(act_temporizador,10); 
+    desc=true; 
 }
+
 function act_temporizador() {
-    let minutos = Math.floor(tiempo / 60); // devuelve el maximo entero 
-    let segundos = tiempo % 60; // calculamos los segundos mediante el resto del tiempo total
-    if (segundos < 10) { //si los segundos son <10 agregar un 0 delante
-        segundos = "0" + segundos;
+    let temporizador=[];
+    temporizador[0] = Math.floor(tiempo / 60);
+    temporizador[1] = tiempo % 60;
+    if (temporizador[1] < 10) { 
+        temporizador[1] = "0" + temporizador[1];
     }
-    console.log(minutos + ":" + segundos);
-    if (tiempo==0 && desc==false) { //si se acaba el tiempo y no se esta descansando, iniciar descanso
+
+    console.log(temporizador[0] + ":" + temporizador[1]);
+
+    if (tiempo==0 && desc==false) { 
         init_desc();
     }
+
     else {
-        tiempo--; //restar 1 del tiempo total
-        if (desc==true  && minutos==0 && segundos==0) { //si se esta descansando y se acabaron los minutos y segundos
-            clearInterval(inicio2); //limpiamos la variable, terminando asi con el intervalo queu llamaba a la funcion act_temporizador
+
+        tiempo--; 
+
+        if (desc==true  && temporizador[0]==0 && temporizador[1]==0) { 
+            clearInterval(inicio2); 
             console.log("Fin descanso");
         }
     }
 }
+
 do {
-    duracion = prompt("Ingrese la duracion que tendran los pomodoros:"); //minutos que le pasaremos al programa
-    descansos= prompt("Ingrese la duracion de los descansos:");
-    if (duracion <= 0 || isNaN(duracion) || descansos<=0 || isNaN(descansos)) {
+
+    pomodoro.duracion = prompt("Ingrese la duracion que tendran los pomodoros:"); 
+    pomodoro.descansos= prompt("Ingrese la duracion de los descansos:");
+
+    if (pomodoro.duracion <= 0 || isNaN(pomodoro.duracion) || pomodoro.descansos<=0 || isNaN(pomodoro.descansos)) {
         console.log("Ingresar una duracion valida.")
     }
     
 
-} while (duracion < 1 || isNaN(duracion) == true || descansos<1 || isNaN(descansos));
+} while (pomodoro.duracion < 1 || isNaN(pomodoro.duracion) == true || pomodoro.descansos<1 || isNaN(pomodoro.descansos));
 
-tiempo = duracion * 60; //convertimos todo a segundos 
+tiempo = pomodoro.duracion * 60;
 
-const inicio = setInterval(act_temporizador, 1000); // ejecutar la funcion act_temporizador cada un intervalo de 1000ms y guardarlo en la constante 'inicio' para luego limpiarla dependiendo la situacion
-//Pruebas 1er ciclo
-    // duracion = 2 (minutos)
-    // tiempo = duracion * 2 -> = 120
-    // llamar funcion cada un intervalo de 1000ms
-    //en la funcion
-        // minutos=tiempo/60 -> = 2 (la funcion math floor devuelve el max entero)
-        // segundos = tiempo % 60 -> = 0 (el resto es 0 ya que duracion es igual a 120)
-        // mostramos en consola el reloj -> 2:00
-        // tiempo = tiempo -1 -> tiempo = 119
-        // si tiempo=0 salimos del intervalo limpiando la variable (este no es el caso), seguimos ejecutando la funcion cada un intervalo de 1000ms
-//Pruebas 2er ciclo
-    // llamar funcion cada un intervalo de 1000ms
-    //en la funcion
-        // minutos=tiempo/60 -> = 1... (la funcion math floor devuelve el max entero) -> 1
-        // segundos = tiempo % 60 -> = 59 (el resto es 59 ya que duracion es igual a 119)
-        // mostramos en consola el reloj -> 1:59
-        // tiempo = tiempo -1 -> tiempo = 118
-        // si tiempo=0 salimos del intervalo limpiando la variable (este no es el caso), seguimos ejecutando la funcion cada un intervalo de 1000ms
-//fin ciclo e inicio descanso
-    //si tiempo =0 se limpia la variable y se inicializa otra con el tiempo correspondiente a 
+const inicio = setInterval(act_temporizador, 10);
+console.log("Inicio sesión");
