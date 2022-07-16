@@ -10,7 +10,7 @@ function init_desc() {
     alert("Inicio descanso")
     tiempo = pomodoro.descansos * 60;
     console.log("Cuenta atras de: " + pomodoro.descansos + ":00");
-    intervalo = setInterval(act_temporizador,10); 
+    intervalo = setInterval(act_temporizador,1000); 
     desc=true; 
 }
 
@@ -19,14 +19,14 @@ function init_pom() {
     tiempo = pomodoro.duracion * 60;
     alert("Inicio de la sesión")
     console.log("Cuenta atras de: " + pomodoro.duracion + ":00");
-    intervalo = setInterval(act_temporizador, 10);
+    intervalo = setInterval(act_temporizador, 1000);
 
 }
 function act_temporizador() {
 
     let temporizador=[];
-    temporizador[0] = Math.floor(tiempo / 60);
-    temporizador[1] = tiempo % 60;
+    temporizador[0] = Math.floor(tiempo / 60); //minutos
+    temporizador[1] = tiempo % 60; //segundos
     if (temporizador[1] < 10) { 
         temporizador[1] = "0" + temporizador[1];
     }
@@ -38,9 +38,8 @@ function act_temporizador() {
     }
 
     else {
-
+        
         tiempo--; 
-
         if (desc==true  && temporizador[0]==0 && temporizador[1]==0) { 
             clearInterval(intervalo); 
             alert("Fin descanso");

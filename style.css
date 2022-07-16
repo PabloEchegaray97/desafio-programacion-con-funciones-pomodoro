@@ -4,16 +4,22 @@
     margin: 0;
     box-sizing: border-box;
     font-family: VT323, monospace;
-
+    /* outline: 2px solid red; */
     letter-spacing: .2rem;
 }
 body {
     background-color: rgb(35, 22, 80);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
 }
 .timer {
     display: flex;
     flex-direction: column;
     align-items: center;
+    
     
 }
 .play {
